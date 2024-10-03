@@ -1,0 +1,32 @@
+﻿
+<PageTitle>Comment</PageTitle>
+
+<h3>Add a new comment... </h3>
+<input placeholder = " Enter comment here... "@bind = "commentText"/>
+<button @onclick = "SubmitComment " > Submit Comment </button>
+
+<ul>
+    @foreach (var comment in comments)
+    {
+        <li>
+            <p>@comment.SanitizedComment</p>
+        </li>
+    }
+</ul>
+
+
+@code {
+    private string? commentText;
+    private List<UserComment> comments = new();
+
+    private void SubmitComment()
+    {
+        if (!string.IsNullOrWhiteSpace(commentText))
+        {
+            UserComment newComment = new UserComment(commentText);
+            comments.Add(newComment);
+            commentText = string.Empty;
+
+        }
+    }
+}
